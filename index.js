@@ -1,3 +1,4 @@
+//Website
 const express = require('express')
 const app = express();
 const port = 3000
@@ -8,6 +9,7 @@ app.listen(port, () =>
   console.log(`Your app is listening a http://localhost:${port}`)
           );
 
+//Discord Bot Client//
 const { Client, Intents } = require('discord.js');
 const token = process.env['key'];
 
