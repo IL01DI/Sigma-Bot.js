@@ -1,15 +1,45 @@
 //Website
-const express = require('express')
+  // require libraries
+const path = require("path");
+const express = require("express");
+const ejs = require("ejs");
+
+  // initiate express app
 const app = express();
-const port = 3000
 
-app.get('/', (req, res) => res.send('Project is running!'))
+  // config express app
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use('/', express.static("public", { maxAge: 10000 }));
 
-app.listen(port, () =>
-  console.log(`Your app is listening a http://localhost:${port}`)
-          );
+app.get('/', function (req, res) {
+    res.render("index");
+});
 
-//Discord Bot Client//
+app.get('/include', function (req, res) {
+    res.render("pages/include"); // the index.ejs file in "views" folder is used to render
+});
+
+app.get('/notfound', function (req, res) {
+    res.render("notfound"); // error, we don't have notfound.ejs file in views folder
+});
+
+// ----------------handle API-------------------------//
+app.get('/ping', function(req, res) {
+   // test route, 
+  res.send("Hello from express");
+});
+
+// catch all route to render the 404 page if the route is not defined 
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname, "public","404.html")));
+
+// app.use(function(req, res, next){
+//   res.sendFile(path.join(__dirname, "public","404.html"));   
+// })
+
+app.listen(5000, function () { console.log("Server is listening on port 5000") });
+
+//Discord Bot Client
 const { Client, Intents } = require('discord.js');
 const token = process.env['key'];
 
