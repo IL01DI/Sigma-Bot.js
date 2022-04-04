@@ -1,0 +1,2 @@
+# Sigma-Bot
+Discord Bot
