@@ -1,2 +1,2 @@
-# Sigma-Bot
-Discord Bot
+# Sigma-Bot.js
+Based on Discord.js
